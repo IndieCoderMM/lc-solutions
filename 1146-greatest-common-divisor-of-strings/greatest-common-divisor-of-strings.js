@@ -6,40 +6,28 @@
 var gcdOfStrings = function(str1, str2) {
     if (str1[0] !== str2[0]) return "";
 
-    let ans = [];
-    // loop for shorter length times
-    for (let i = 0; i < Math.min(str1.length, str2.length); i++) {
-         ans.push(str1[i]);
-        if (str1[i] !== str2[i]) break;
-    }
+    return str1.length > str2.length ? divideStr(str1, str2) : divideStr(str2, str1);
+};
 
+const divideStr = (longStr, str) => {
+    let ans = str.split('');
     while (ans.length > 0) {
-        if (str1.length % ans.length || str2.length % ans.length) {
+        if (longStr.length % ans.length || str.length % ans.length) {
             ans.pop();
             continue;
         }
-        let [i, j] = [0, 0];
-        while (i < Math.max(str1.length, str2.length)) {
-            if (i < str1.length) {
-                if (str1[i] !== ans[j]) {
-                    break;
-                }
-            }
-            if (i < str2.length) {
-                if (str2[i] !== ans[j]) {
-                    break;
-                }
-            }
-            i += 1;
-            j = (j + 1) % ans.length;
-        }
-        if (i === Math.max(str1.length, str2.length)) {
-            return ans.join('');
+        let j = 0;
+        for (let i = 0; i < longStr.length; i++) {
+            if (longStr[i] !== ans[j]) break;
+            if (i < str.length && str[i] !== ans[j]) break;
+            j = (j+1) % ans.length;
+            if (i === longStr.length - 1) return ans.join('');
         }
         ans.pop();
     }
+
     return ans.join('');
-};
+}
 
 // divisor = ""
 // loop i; i < minLen(str1, str2); i++
