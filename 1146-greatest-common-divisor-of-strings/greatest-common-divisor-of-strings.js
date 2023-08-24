@@ -4,7 +4,7 @@
  * @return {string}
  */
 var gcdOfStrings = function(str1, str2) {
-    if (str1[0] !== str2[0]) return "";
+    if (str1+str2 !== str2+str1) return "";
 
     return str1.length > str2.length ? findGCD(str1, str2) : findGCD(str2, str1);
 };
