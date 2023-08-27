@@ -5,7 +5,7 @@
  */
 var canPlaceFlowers = function(flowerbed, n) {
     if (n === 0) return true;
-    
+
     const helper = [0, ...flowerbed, 0];
     let plantable = 0;
 
@@ -16,7 +16,6 @@ var canPlaceFlowers = function(flowerbed, n) {
         }
         if (plantable === n) return true;
     }
-    console.log(helper);
 
     return false;
 };
