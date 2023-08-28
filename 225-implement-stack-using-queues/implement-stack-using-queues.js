@@ -8,6 +8,7 @@ var MyStack = function() {
  */
 MyStack.prototype.push = function(x) {
     this.queue.enqueue(x);
+    this.topItem = x;
 };
 
 /**
@@ -15,32 +16,21 @@ MyStack.prototype.push = function(x) {
  */
 MyStack.prototype.pop = function() {
     const helper = new MyQueue();
-    const size = this.queue.size();
-    while (helper.size() < size - 1) {
-        helper.enqueue(this.queue.dequeue());
+    while (this.queue.size() > 1) {
+        this.topItem = this.queue.dequeue();
+        helper.enqueue(this.topItem);
     }
-    while (!helper.empty()) {
-        this.queue.enqueue(helper.dequeue());
-    }
+    const poped = this.queue.dequeue();
+    this.queue = helper;
 
-    return this.queue.dequeue();
+    return poped;
 };
 
 /**
  * @return {number}
  */
 MyStack.prototype.top = function() {
-    const helper = new MyQueue();
-    const size = this.queue.size();
-    let top = null;
-    while (helper.size() < size) {
-        top = this.queue.peek();
-        helper.enqueue(this.queue.dequeue());
-    }
-    while (!helper.empty()) {
-        this.queue.enqueue(helper.dequeue());
-    }
-    return top;
+    return this.topItem;
 };
 
 /**
@@ -66,10 +56,6 @@ class MyQueue {
 
     size() {
         return this.list.length;
-    }
-
-    peek() {
-        return this.list[0];
     }
 
     empty() {
