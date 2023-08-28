@@ -24,13 +24,8 @@ var reverseWords = function(s) {
 
     reverse(arr, i, arr.length - 1);
 
-    let ans = ""
-    for (let i = 0; i < arr.length; i++) {
-        ans += arr[i];
-        while (arr[i] === ' ' && arr[i+1] === ' ' ) i++;
-    }
-    
-    return ans;
+
+    return arr.join('');
 };
 
 const reverse = (arr, from, to) => {
