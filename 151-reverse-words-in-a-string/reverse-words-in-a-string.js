@@ -3,7 +3,14 @@
  * @return {string}
  */
 var reverseWords = function(s) {
-    let arr = s.trim().split('');
+    let arr = [];
+
+    // str to arr
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === ' ' && (s[i+1] === ' ' || i === s.length - 1 || arr.length === 0)) 
+            continue;
+        arr.push(s[i]);
+    }
 
     reverse(arr, 0, arr.length - 1);
 
@@ -13,8 +20,6 @@ var reverseWords = function(s) {
         reverse(arr, i, j-1);
 
         i = j + 1;
-        while (arr[i] === ' ') i++;
-        if (i >= arr.length) break;
     }
 
     reverse(arr, i, arr.length - 1);
