@@ -10,10 +10,11 @@ var reverseWords = function(s) {
     let i = 0;
     for (let j = 1; j < arr.length; j++) {
         if (arr[j] !== ' ') continue;
-
         reverse(arr, i, j-1);
 
         i = j + 1;
+        while (arr[i] === ' ') i++;
+        if (i >= arr.length) break;
     }
 
     reverse(arr, i, arr.length - 1);
