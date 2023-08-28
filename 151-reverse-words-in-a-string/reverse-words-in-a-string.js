@@ -12,9 +12,10 @@ var reverseWords = function(s) {
         if (arr[j] !== ' ') continue;
 
         reverse(arr, i, j-1);
+
         i = j + 1;
     }
-    
+
     reverse(arr, i, arr.length - 1);
 
     let ans = ""
