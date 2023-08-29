@@ -5,10 +5,8 @@
 var moveZeroes = function(nums) {
     let i = 0;
     for (let j = 0; j < nums.length; j++) {
-        if (nums[j] !== 0) {
-            [nums[i], nums[j]] = [nums[j], nums[i]];
-            i += 1;
-        }
+        if (nums[j] === 0) continue;
+        [nums[i], nums[j]] = [nums[j], nums[i]];
+        i += 1;
     }
-    console.log(nums);
 };
