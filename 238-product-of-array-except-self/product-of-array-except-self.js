@@ -4,8 +4,7 @@
  */
 var productExceptSelf = function(nums) {
     const len = nums.length;
-    const ans = [];
-    ans[0] = 1;
+    const ans = [1];
 
     for (let i = 1; i < len; i++) {
         ans[i] = ans[i-1] * nums[i-1];
