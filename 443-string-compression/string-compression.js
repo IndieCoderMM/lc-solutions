@@ -6,18 +6,6 @@ var compress = function(chars) {
     const len = chars.length;
     if (len === 0) return [];
 
-    const s = getStr(chars);
-
-    for (let i = 0; i < s.length; i++) {
-        chars[i] = s[i];
-    }
-
-    for (let i = s.length; i < len; i++) {
-        chars.pop();
-    }
-};
-
-const getStr = (chars) => {
     let s = "";
 
     for (let i = 0; i < chars.length; i++) {
@@ -33,8 +21,14 @@ const getStr = (chars) => {
         i += count - 1;
     }
 
-    return s;
-}
+    for (let i = 0; i < s.length; i++) {
+        chars[i] = s[i];
+    }
+
+    for (let i = s.length; i < len; i++) {
+        chars.pop();
+    }
+};
 
 // ["a","a","b","b","c","c","c"] => ["a","2","b","2","c","3"]
 // >> 6
