@@ -7,8 +7,9 @@ var compress = function(chars) {
     if (len === 0) return [];
 
     let idx = 0;
+    let i = 0;
 
-    for (let i = 0; i < chars.length; i++) {
+    while (i < len) {
         const curr = chars[i];
         let j = i+1;
 
@@ -27,7 +28,7 @@ var compress = function(chars) {
                 idx += 1;
             }
         } 
-        i += count - 1;
+        i += count;
     }
 
 
