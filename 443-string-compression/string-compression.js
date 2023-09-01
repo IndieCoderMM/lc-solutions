@@ -6,13 +6,7 @@ var compress = function(chars) {
     const len = chars.length;
     if (len === 0) return [];
 
-    let prev = chars[0];
-    let count = 1;
     const s = getStr(chars);
-
-    for (let i = 0; i < len; i++) {
-
-    }
 
     for (let i = 0; i < s.length; i++) {
         chars[i] = s[i];
