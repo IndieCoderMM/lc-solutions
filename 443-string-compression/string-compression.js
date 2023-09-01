@@ -22,8 +22,7 @@ var compress = function(chars) {
         idx += 1;
 
         if (count > 1) {
-            const s = count.toString();
-            for (let c of s) {
+            for (let c of count.toString()) {
                 chars[idx] = c;
                 idx += 1;
             }
@@ -32,9 +31,7 @@ var compress = function(chars) {
     }
 
 
-    for (let i = idx; i < len; i++) {
-        chars.pop();
-    }
+    chars = chars.slice(0, idx)
 
     return chars.length;
 };
