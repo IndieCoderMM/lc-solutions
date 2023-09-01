@@ -32,11 +32,7 @@ var compress = function(chars) {
     }
 
 
-    for (let i = idx; i < len; i++) {
-        chars.pop();
-    }
-
-    return chars.length;
+    return idx;
 };
 
 // ["a","a","b","b","c","c","c"] => ["a","2","b","2","c","3"]
