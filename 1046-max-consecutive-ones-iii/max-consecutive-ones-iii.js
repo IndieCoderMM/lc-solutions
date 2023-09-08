@@ -5,11 +5,9 @@
  */
 var longestOnes = function(nums, k) {
     const len = nums.length;
-    let maxLen = 0;
-    let left = 0;
-    let flipped = 0;
-    let i = 0;
-
+    let [maxLen, flipped, left, i] = [0, 0, 0, 0];
+    
+    // flip until k limit
     while (flipped < k && i < len) {
         if (nums[i] === 0) flipped++;
         i++;
@@ -18,7 +16,7 @@ var longestOnes = function(nums, k) {
 
     let curr = maxLen;
     for (i; i < len; i++) {
-        // if third zero is found
+        // if another zero is found
         if (nums[i] === 0) {
             // find left most zero
             while (nums[left] === 1 && left < len) {
