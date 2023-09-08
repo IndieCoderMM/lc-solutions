@@ -18,11 +18,13 @@ var longestOnes = function(nums, k) {
 
     let curr = maxLen;
     for (i; i < len; i++) {
+        // if third zero is found
         if (nums[i] === 0) {
+            // find left most zero
             while (nums[left] === 1 && left < len) {
                 left++;
             }
-
+            // reduce window size
             left++;
             curr = i - left;
         }
