@@ -5,32 +5,20 @@
  */
 var longestOnes = function(nums, k) {
     const len = nums.length;
-    let [maxLen, flipped, left, i] = [0, 0, 0, 0];
-    
-    // flip until k limit
-    while (flipped < k && i < len) {
-        if (nums[i] === 0) flipped++;
-        i++;
-        maxLen++;
-    }
+    let [maxLen, zeros, left] = [0, 0, 0, 0];
 
-    let curr = maxLen;
-    for (i; i < len; i++) {
-        // if another zero is found
+    for (let i = 0; i < len; i++) {
         if (nums[i] === 0) {
-            // find left most zero
-            while (nums[left] === 1 && left < len) {
-                left++;
-            }
-            // reduce window size
-            left++;
-            curr = i - left;
+            zeros++;
         }
 
-        curr++;
-        if (curr > maxLen) maxLen = curr;
-    }
+        while (zeros > k) {
+            if (nums[left] === 0) zeros--;
+            left++;
+        }
 
+        maxLen = Math.max(maxLen, i - left + 1)
+    }
 
     return maxLen;
 };
