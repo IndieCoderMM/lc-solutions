@@ -5,7 +5,9 @@
  */
 var longestOnes = function(nums, k) {
     const len = nums.length;
-    let [maxLen, zeros, left] = [0, 0, 0, 0];
+    if (nums.filter(n => n === 0).length < k) return len;
+    
+    let [maxLen, zeros, left] = [0, 0, 0];
 
     for (let i = 0; i < len; i++) {
         if (nums[i] === 0) {
