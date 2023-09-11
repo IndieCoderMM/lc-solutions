@@ -7,8 +7,11 @@ var groupThePeople = function(groupSizes) {
     const ans = [];
     for (let i = 0; i < groupSizes.length; i++) {
         const size = groupSizes[i];
-        bucket.set(size, [i, ...(bucket.get(size) || [])]);
-        
+        if (bucket.has(size))
+            bucket.set(size, [i, ...bucket.get(size)]);
+        else bucket.set(size, [i]);
+
+
         if (bucket.get(size).length === size) {
             ans.push(bucket.get(size));
             bucket.set(size, []);
