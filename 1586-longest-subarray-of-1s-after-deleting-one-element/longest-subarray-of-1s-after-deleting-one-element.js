@@ -4,7 +4,7 @@
  */
 var longestSubarray = function(nums) {
     const len = nums.length;
-    if (nums.filter(n => n === 0).length === 1) return len - 1;
+    if (nums.filter(n => n === 0).length <= 1) return len - 1;
 
     let [maxLen, zeros, left] = [0, 0, 0];
 
