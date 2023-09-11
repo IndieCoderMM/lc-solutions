@@ -4,25 +4,16 @@
  */
 var groupThePeople = function(groupSizes) {
     const bucket = new Map();
+    const ans = [];
     for (let i = 0; i < groupSizes.length; i++) {
-        if (bucket.has(groupSizes[i])) {
-            bucket.set(groupSizes[i], [i, ...bucket.get(groupSizes[i])]);
-        } else {
-            bucket.set(groupSizes[i], [i])
+        const size = groupSizes[i];
+        bucket.set(groupSizes[i], [i, ...(bucket.get(groupSizes[i]) || [])]);
+
+        if (bucket.get(size).length === size) {
+            ans.push(bucket.get(size));
+            bucket.set(groupSizes[i], []);
         }
     };
-    const ans = [];
-    for (let k of bucket.keys()) {
-        const ids = bucket.get(k);
-        let curr = [];
-        for (let i of ids) {
-            curr.push(i);
-            if (curr.length === k) {
-                ans.push(curr);
-                curr = [];
-            }
-        }
-    }
 
     return ans;
 };
