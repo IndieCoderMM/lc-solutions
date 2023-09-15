@@ -3,29 +3,34 @@
  * @return {number[]}
  */
 var asteroidCollision = function(asteroids) {
-    const ans = [];
     const stack = [];
-    for (let i = 0; i < asteroids.length; i++) {
-        if (asteroids[i] > 0) {
-            stack.push(asteroids[i]);
-            continue;
-        }
-        
-        let outcome = asteroids[i];
-        while (stack.length > 0 && outcome) {
-            if (stack[stack.length - 1] > Math.abs(outcome)) {
-                outcome = null;
-            } else if (stack[stack.length - 1] === Math.abs(outcome)) {
-                outcome = null;
-                stack.pop();
-            } else {
-                stack.pop();
+
+    const isEmpty = () => stack.length === 0;
+    const top = () => stack[stack.length - 1];
+
+    for (let ast of asteroids) {
+        let collision = false;
+        while (stack.length > 0 && ast < 0 && top() > 0) {
+            const prev = stack.pop();
+            // both get destroyed
+            if (prev === Math.abs(ast)) {
+                collision = true;
+                break;
+            }
+            // if greater than curr re-add to stack
+            if (prev > Math.abs(ast))  {
+                collision = true;
+                stack.push(prev);
+                break;
             }
         }
-        if (outcome)
-            ans.push(outcome);
+        if (collision) continue;
+        // No collision or current is moving right
+        if (isEmpty() || top() < 0 || ast > 0) {
+            stack.push(ast);
+        }
     }
-    for (let a of stack) ans.push(a);
 
-    return ans;
+
+    return stack;
 };
