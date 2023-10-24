@@ -13,18 +13,23 @@
 var largestValues = function(root) {
     if (!root) return [];
     const maxValues = [];
-   let row = [root];
 
-   while (row.length > 0) {
-       const maxV = Math.max(...row.map(r => r.val));
-        maxValues.push(maxV);
-        const nextRow = [];
-        for (let node of row) {
-            if (node.left) nextRow.push(node.left);
-            if (node.right) nextRow.push(node.right);
+    const queue = [root];
+
+    while (queue.length > 0) {
+        const len = queue.length;
+        let maxVal = -Infinity;
+
+        for (let i = 0 ; i < len; i++) {
+            const node = queue.shift();
+            maxVal = Math.max(node.val, maxVal);
+            if (node.left) queue.push(node.left);
+            if (node.right) queue.push(node.right);
         }
-        row = nextRow;
-   }
+
+        maxValues.push(maxVal);
+    }
+   
 
    return maxValues;
 };
