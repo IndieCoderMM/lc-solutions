@@ -3,26 +3,26 @@
  * @return {boolean}
  */
 var validPartition = function(nums) {
-    const memo = new Map();
-    const dfs = (i) => {
-        if (i === nums.length) return true;
+  const len = nums.length;
+  const validTwo = (i) => nums[i] === nums[i + 1];
 
-        if (memo.has(i)) return memo.get(i);
+  if (len === 2) return validTwo(0);
 
-        let valid = false;
-        if (i < nums.length - 1 && nums[i] === nums[i+1]) {
-            valid ||= dfs(i+2);
-        }
-        if (i < nums.length - 2) {
-            if ((nums[i] === nums[i+1] && nums[i] === nums[i+2]) || (nums[i] + 1 === nums[i+1] && nums[i] + 2 === nums[i+2])) {
-                valid ||= dfs(i+3);
-            }
-        } 
+  const validThree = (i) => {
+    const case1 = (nums[i] === nums[i + 1] && nums[i] === nums[i + 2]);
+    const case2 = (nums[i] + 1 === nums[i + 1] && nums[i] + 2 === nums[i + 2]);
 
-        memo.set(i, valid);
+    return case1 || case2;
+  }
 
-        return valid;
-    }
+  const dp = [validThree(len - 3), validTwo(len - 2), false];
 
-    return dfs(0);
+  for (let i = len - 4; i >= 0; i--) {
+    let valid = validTwo(i) && dp[1];
+    valid ||= validThree(i) && dp[2];
+
+    [dp[0], dp[1], dp[2]] = [valid, dp[0], dp[1]];
+  }
+
+  return dp[0];
 };
