@@ -4,13 +4,11 @@ class Solution:
       res = -1
       sum = 0
 
-      i = 0
-      while (i < len(sorted_nums)):
-        if sum > sorted_nums[i]:
-          res = sum + sorted_nums[i]
+      for n in sorted_nums:
+        if sum > n:
+          res = sum + n
         
-        sum += sorted_nums[i]
-        i += 1
+        sum +=  n
 
       return res
 
