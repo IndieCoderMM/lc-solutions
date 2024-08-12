@@ -4,13 +4,13 @@ func twoSum(nums []int, target int) []int {
     dict := map[int]int{}
 
     for i, n := range nums {
-        j, ok := dict[n]
+        j, ok := dict[target-n]
 
         if ok {
             return []int{i,j}
         }
 
-        dict[target-n] = i
+        dict[n] = i
     }
 
     return []int{}
