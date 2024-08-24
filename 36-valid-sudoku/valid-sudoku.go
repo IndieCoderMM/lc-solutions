@@ -37,7 +37,6 @@ func isValidSudoku(board [][]byte) bool {
             row = append(row, num)
             colMap[c] = append(col, num)
             sqMap[[2]int{sqRow, sqCol}] = append(sq, num)
-            fmt.Println(sqMap)
         }
     }
 
