@@ -1,6 +1,5 @@
 import (
     "slices"
-    "fmt"
 )
 
 func isValidSudoku(board [][]byte) bool {
