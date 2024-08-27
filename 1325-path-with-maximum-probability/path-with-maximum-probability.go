@@ -43,8 +43,9 @@ type Path struct {
 }
 
 func maxProbability(n int, edges [][]int, succProb []float64, start_node int, end_node int) float64 {
-    graph := make(map[int][]Path)
-    visited := make(map[int]bool)
+    graph := make(map[int][]Path, n)
+    visited := make(map[int]bool, n)
+    maxProbs := make([]float64, n)
 
     pq := PQ{&Item{
         value: start_node,
@@ -60,16 +61,20 @@ func maxProbability(n int, edges [][]int, succProb []float64, start_node int, en
     }
     
     for {
-        if len(pq) == 0 {
+        if pq.Len() == 0 {
             return 0
         }
 
         curr := heap.Pop(&pq).(*Item)
-        visited[curr.value] = true
 
         if curr.value == end_node {
             return curr.priority
         }
+
+        if _, ok := visited[curr.value]; ok {
+            continue
+        }
+        visited[curr.value] = true
         
         neighbors, ok := graph[curr.value]
         if !ok {
@@ -81,6 +86,11 @@ func maxProbability(n int, edges [][]int, succProb []float64, start_node int, en
             if isVisited {
                 continue
             }
+            prob := n.prob * curr.priority
+            if prob <= maxProbs[n.to] {
+                continue
+            }
+            maxProbs[n.to] = prob
             heap.Push(&pq, &Item{
                 value: n.to,
                 priority: n.prob * curr.priority,
