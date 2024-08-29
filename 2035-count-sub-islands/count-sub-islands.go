@@ -7,9 +7,9 @@ func countSubIslands(grid1 [][]int, grid2 [][]int) int {
     paths := make(map[Coord]bool)
     var ans int = 0
 
-    var travel func(x, y int, coords *[]Coord) 
+    var travel func(x, y int, coords *[]Coord, isValid *bool) 
 
-    travel = func(x, y int, coords *[]Coord) {
+    travel = func(x, y int, coords *[]Coord, isValid *bool) {
         if y < 0 || x < 0 {
             return 
         }
@@ -23,13 +23,17 @@ func countSubIslands(grid1 [][]int, grid2 [][]int) int {
             return
         }
 
+        if grid1[y][x] == 0 {
+            *isValid = false
+        }
+
         *coords = append(*coords, Coord{x, y})
         paths[Coord{x, y}] = true
 
-        travel(x+1, y, coords)
-        travel(x-1, y, coords)
-        travel(x, y+1, coords)
-        travel(x, y-1, coords)
+        travel(x+1, y, coords, isValid)
+        travel(x-1, y, coords, isValid)
+        travel(x, y+1, coords, isValid)
+        travel(x, y-1, coords, isValid)
     }
 
     for y, row := range grid2 {
@@ -41,14 +45,8 @@ func countSubIslands(grid1 [][]int, grid2 [][]int) int {
                 continue
             }
             coords := []Coord{}
-            travel(x, y, &coords)
             isValid := true
-            for _, c := range coords {
-                if grid1[c.y][c.x] == 0 {
-                    isValid = false
-                    break
-                }
-            } 
+            travel(x, y, &coords, &isValid)
             if isValid {
                 ans++
             }
