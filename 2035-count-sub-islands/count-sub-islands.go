@@ -1,7 +1,3 @@
-import (
-    "fmt"
-)
-
 type Coord struct {
     x int
     y int
@@ -50,7 +46,6 @@ func countSubIslands(grid1 [][]int, grid2 [][]int) int {
             islands = append(islands, coords)
         }
     }
-    fmt.Println(islands)
 
     for _, coords := range islands {
         isValid := true
