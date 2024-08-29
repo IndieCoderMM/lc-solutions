@@ -4,8 +4,14 @@ type Coord struct {
 }
 
 func countSubIslands(grid1 [][]int, grid2 [][]int) int {
-    paths := make(map[Coord]bool)
+    paths := make([][]bool, len(grid2))
     var ans int = 0
+
+    for i := range grid2 {
+        for j := 0; j <= len(grid2[i]) - 1; j++ {
+            paths[i] = append(paths[i], false)
+        }
+    }
 
     var travel func(x, y int, coords *[]Coord, isValid *bool) 
 
@@ -19,7 +25,7 @@ func countSubIslands(grid1 [][]int, grid2 [][]int) int {
         if grid2[y][x] == 0 {
             return
         }
-        if _, ok := paths[Coord{x, y}]; ok {
+        if paths[y][x] {
             return
         }
 
@@ -28,7 +34,7 @@ func countSubIslands(grid1 [][]int, grid2 [][]int) int {
         }
 
         *coords = append(*coords, Coord{x, y})
-        paths[Coord{x, y}] = true
+        paths[y][x] = true
 
         travel(x+1, y, coords, isValid)
         travel(x-1, y, coords, isValid)
@@ -41,7 +47,7 @@ func countSubIslands(grid1 [][]int, grid2 [][]int) int {
             if v == 0 {
                 continue
             }
-            if visited := paths[Coord{x, y}]; visited {
+            if paths[y][x] {
                 continue
             }
             coords := []Coord{}
