@@ -1,24 +1,17 @@
 func kthDistinct(arr []string, k int) string {
     dict := make(map[string]int, len(arr))
-    values := make([]string, len(arr))
 
-    for i, s := range arr {
-        _, dupe := dict[s]
-        values[i] = s
-        if dupe {
-            dict[s] = -1
-            continue
-        } 
-        dict[s] = i
+    for _, s := range arr {
+        dict[s]++
     }
 
-    ans := 0
-    for _, s := range values {
-        if dict[s] == -1 {
+    counter := 0
+    for _, s := range arr {
+        if dict[s] > 1 {
             continue
         }
-        ans++
-        if ans == k {
+        counter++
+        if counter == k {
             return s
         }
     }
