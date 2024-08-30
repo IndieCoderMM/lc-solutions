@@ -1,5 +1,5 @@
 func kthDistinct(arr []string, k int) string {
-    dict := make(map[string]int)
+    dict := make(map[string]int, len(arr))
     values := make([]string, len(arr))
 
     for i, s := range arr {
