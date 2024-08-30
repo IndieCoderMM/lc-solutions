@@ -11,7 +11,6 @@ func kthDistinct(arr []string, k int) string {
         } 
         dict[s] = i
     }
-    print(dict)
 
     ans := 0
     for _, s := range values {
