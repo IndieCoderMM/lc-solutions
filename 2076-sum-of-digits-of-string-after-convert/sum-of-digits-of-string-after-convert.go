@@ -1,7 +1,3 @@
-import(
-    "fmt"
-)
-
 func getLucky(s string, k int) int {
     var ans int = 0
 
