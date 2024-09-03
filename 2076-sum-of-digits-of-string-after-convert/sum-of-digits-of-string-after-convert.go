@@ -18,6 +18,10 @@ func getLucky(s string, k int) int {
             ans /= 10
         }
         ans += sum
+
+        if ans < 10 {
+            break
+        }
     }
 
     return ans 
