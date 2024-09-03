@@ -1,26 +1,31 @@
 import(
     "fmt"
-    "strings"
-    "strconv"
 )
 
 func getLucky(s string, k int) int {
-    var nums strings.Builder
     var ans int = 0
 
     for _, c := range s {
         n := int(c - 96)
-        nums.WriteString(strconv.Itoa(n))
+        if n >= 10 {
+            ans += n % 10
+            ans += n / 10
+        } else {
+            ans += n
+        }
     }
 
-    curr := nums.String()
-    for i := 0; i < k; i++ {
+    for i:=1; i < k; i++ {
         sum := 0
-        for _, c := range curr {
-            sum += int(c - 48)
+        for {
+            if ans == 0 {
+                break
+            }
+
+            sum += ans % 10
+            ans /= 10
         }
-        ans = sum
-        curr = strconv.Itoa(ans)
+        ans = sum + ans
     }
 
     return ans 
