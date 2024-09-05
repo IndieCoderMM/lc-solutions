@@ -4,14 +4,14 @@ import (
 
 func robotSim(commands []int, obstacles [][]int) int {
    dir := [4][2]int{{0,1}, {1,0}, {0, -1}, {-1, 0}}
-   obsMap := make(map[string]bool, len(obstacles))
+   obsMap := make(map[string]struct{}, len(obstacles))
    d := 0 // North
    maxDist := 0
    x, y := 0, 0
 
    for _, o := range obstacles {
     k := fmt.Sprintf("%d-%d", o[0], o[1])
-    obsMap[k] = true
+    obsMap[k] = struct{}{}
    }
 
    for _, c := range commands {
